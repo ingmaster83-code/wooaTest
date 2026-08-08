@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZGENFSXWC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9ZGENFSXWC');
+  </script>
+  <meta name="naver-site-verification" content="2f35022fa3791d80d8010b63dbfde7b439dc11b1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <title>퍼스널컬러 테스트 - 사진 없이 알아보는 나의 톤 | 우아테스트</title>
+  <meta name="description" content="24문항으로 알아보는 무료 퍼스널컬러 테스트. 사진 업로드 없이 봄웜/여름쿨/가을웜/겨울쿨 4가지 타입 중 나의 톤을 확인해보세요.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://wooatest.wooahouse.com/personalcolor.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="퍼스널컬러 테스트 - 사진 없이 알아보는 나의 톤">
+  <meta property="og:description" content="24문항으로 알아보는 무료 퍼스널컬러 테스트.">
+  <meta property="og:url" content="https://wooatest.wooahouse.com/personalcolor.html">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="WooaTest">
+  <meta name="theme-color" content="#7C3AED">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo"><span class="logo-icon">🔮</span>Wooa<span>Test</span></a>
+    <nav class="header-nav"><a href="index.html">홈</a></nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:2rem 1.25rem 1.5rem;">
+  <h1>퍼스널컬러 테스트</h1>
+  <div class="hero-badges">
+    <span class="badge">🎨 24문항</span>
+    <span class="badge">⏱ 3분 소요</span>
+    <span class="badge">🔢 4가지 톤</span>
+    <span class="badge">🆓 무료</span>
+  </div>
+</section>
+
+<main>
+
+  <div class="mobile-top-ad">
+    <ins class="adsbygoogle" style="display:block;width:100%;height:80px" data-ad-client="ca-pub-6464921081676309" data-ad-slot="7080296704" data-ad-format="auto"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="index.html">홈</a> &rsaquo; <span>퍼스널컬러 테스트</span>
+  </nav>
+
+  <div class="page-with-sidebar">
+    <div class="main-col">
+
+      <div class="ad-slot" style="margin-bottom:1.5rem;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6464921081676309" data-ad-slot="7080296704" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <div class="disclaimer-box">
+        ⚠️ 실제 퍼스널컬러는 전문가의 드레이핑 진단이 가장 정확해요. 이 테스트는 사진 없이 즐기는 참고용 약식 버전입니다.
+      </div>
+
+      <div class="quiz-box">
+        <div id="quizStart" class="quiz-start-box">
+          <div class="quiz-start-emoji">🎨</div>
+          <h2 style="margin:.25rem 0;color:var(--navy);">나의 퍼스널컬러는?</h2>
+          <p class="quiz-start-desc">사진 업로드 없이, 24개의 질문만으로<br>봄웜·여름쿨·가을웜·겨울쿨 중 나의 톤을 확인해보세요.</p>
+          <button class="btn btn-primary btn-lg" id="quizStartBtn">시작하기 →</button>
+        </div>
+
+        <div id="quizQuestion" style="display:none;">
+          <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+          <div class="quiz-progress-label" id="quizProgressLabel">1 / 24</div>
+          <div class="quiz-question" id="quizQuestionText"></div>
+          <div class="quiz-choices">
+            <button class="quiz-choice-btn" id="quizChoiceA"></button>
+            <button class="quiz-choice-btn" id="quizChoiceB"></button>
+          </div>
+          <div class="quiz-nav"><button class="quiz-back-btn" id="quizBackBtn">← 이전 질문</button></div>
+        </div>
+
+        <div id="quizResult" style="display:none;">
+          <div class="result-box" id="quizResultArea"></div>
+          <div class="result-actions">
+            <button class="btn btn-secondary" id="quizRetryBtn">🔄 다시 하기</button>
+            <button class="btn btn-secondary" id="quizShareBtn">📤 결과 공유하기</button>
+            <a href="index.html" class="btn btn-secondary">🏠 다른 테스트 보기</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ad-slot" style="margin:1.5rem 0;">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6464921081676309" data-ad-slot="1419180025" data-ad-format="auto" data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <div class="tips-panel">
+        <h3>💡 Tips</h3>
+        <ul>
+          <li>애매하면 평소 주변에서 들었던 스타일링 칭찬을 떠올려보세요.</li>
+          <li>정확한 진단을 원한다면 전문가의 드레이핑 컨설팅을 받아보세요.</li>
+          <li>결과에 나온 컬러로 립스틱이나 옷을 골라보는 재미가 있어요.</li>
+        </ul>
+      </div>
+
+      <div class="faq-section">
+        <h2>자주 묻는 질문</h2>
+        <details><summary>사진 없이도 정확한가요?</summary><p>사진이나 실물 드레이핑 진단만큼 정확하진 않아요. 재미로 즐기는 참고용 테스트로 봐주시고, 정확한 진단은 전문가 상담을 추천해요.</p></details>
+        <details><summary>웜톤 쿨톤은 어떻게 나뉘나요?</summary><p>피부의 언더톤(황색기·붉은기)에 따라 웜톤과 쿨톤으로 나뉘고, 명도·채도에 따라 각각 봄/가을, 여름/겨울로 세분화돼요.</p></details>
+        <details><summary>내 답변이 서버에 저장되나요?</summary><p>아니요. 모든 계산은 브라우저 안에서만 이루어지며 서버로 전송되지 않습니다.</p></details>
+      </div>
+
+    </div>
+    <aside class="tool-sidebar"></aside>
+  </div>
+
+</main>
+
+<footer class="footer"></footer>
+
+<script src="js/data-personalcolor.js"></script>
+<script src="js/quiz-axis-engine.js"></script>
+<script src="js/wooa-sidebar.js"></script>
+<script src="js/wooa-footer.js"></script>
+<script src="js/share-button.js"></script>
+<script src="js/ad-dev-placeholder.js"></script>
+
+</body>
+</html>

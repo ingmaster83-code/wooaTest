@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-9ZGENFSXWC"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-9ZGENFSXWC');
+  </script>
+  <meta name="naver-site-verification" content="2f35022fa3791d80d8010b63dbfde7b439dc11b1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="img/icon.svg" type="image/svg+xml">
+  <title>MBTI 성격유형검사 - 16가지 유형 무료 테스트 | 우아테스트</title>
+  <meta name="description" content="40문항으로 알아보는 무료 MBTI 성격유형검사. 회원가입 없이 바로 시작하고 16가지 유형 중 나의 성격유형을 확인해보세요.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://wooatest.wooahouse.com/mbti.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MBTI 성격유형검사 - 16가지 유형 무료 테스트">
+  <meta property="og:description" content="40문항으로 알아보는 무료 MBTI 성격유형검사. 회원가입 없이 바로 시작하세요.">
+  <meta property="og:url" content="https://wooatest.wooahouse.com/mbti.html">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="WooaTest">
+  <meta name="theme-color" content="#7C3AED">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css?v=1">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6464921081676309" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-icon">🔮</span>
+      Wooa<span>Test</span>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html">홈</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding:2rem 1.25rem 1.5rem;">
+  <h1>MBTI 성격유형검사</h1>
+  <div class="hero-badges">
+    <span class="badge">📝 40문항</span>
+    <span class="badge">⏱ 5분 소요</span>
+    <span class="badge">🎯 16가지 유형</span>
+    <span class="badge">🆓 무료</span>
+  </div>
+</section>
+
+<main>
+
+  <div class="mobile-top-ad">
+    <ins class="adsbygoogle"
+         style="display:block;width:100%;height:80px"
+         data-ad-client="ca-pub-6464921081676309"
+         data-ad-slot="7080296704"
+         data-ad-format="auto"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+
+  <nav class="breadcrumb" aria-label="breadcrumb">
+    <a href="index.html">홈</a> &rsaquo; <span>MBTI 성격유형검사</span>
+  </nav>
+
+  <div class="page-with-sidebar">
+    <div class="main-col">
+
+      <!-- 광고 -->
+      <div class="ad-slot" style="margin-bottom:1.5rem;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6464921081676309"
+             data-ad-slot="7080296704"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <div class="quiz-box">
+
+        <div id="quizStart" class="quiz-start-box">
+          <div class="quiz-start-emoji">🔮</div>
+          <h2 style="margin:.25rem 0;color:var(--navy);">나의 성격유형은?</h2>
+          <p class="quiz-start-desc">40개의 질문에 답하면 16가지 MBTI 유형 중<br>나에게 가장 가까운 유형을 알려드려요.</p>
+          <button class="btn btn-primary btn-lg" id="quizStartBtn">시작하기 →</button>
+        </div>
+
+        <div id="quizQuestion" style="display:none;">
+          <div class="quiz-progress-track"><div class="quiz-progress-fill" id="quizProgressFill"></div></div>
+          <div class="quiz-progress-label" id="quizProgressLabel">1 / 40</div>
+          <div class="quiz-question" id="quizQuestionText"></div>
+          <div class="quiz-choices">
+            <button class="quiz-choice-btn" id="quizChoiceA"></button>
+            <button class="quiz-choice-btn" id="quizChoiceB"></button>
+          </div>
+          <div class="quiz-nav">
+            <button class="quiz-back-btn" id="quizBackBtn">← 이전 질문</button>
+          </div>
+        </div>
+
+        <div id="quizResult" style="display:none;">
+          <div class="result-box" id="quizResultArea"></div>
+          <div class="result-actions">
+            <button class="btn btn-secondary" id="quizRetryBtn">🔄 다시 하기</button>
+            <button class="btn btn-secondary" id="quizShareBtn">📤 결과 공유하기</button>
+            <a href="index.html" class="btn btn-secondary">🏠 다른 테스트 보기</a>
+          </div>
+          <p class="result-share-hint">주소창의 링크를 복사하면 결과를 그대로 공유할 수 있어요.</p>
+        </div>
+
+      </div>
+
+      <!-- 광고 -->
+      <div class="ad-slot" style="margin:1.5rem 0;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-6464921081676309"
+             data-ad-slot="1419180025"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+
+      <div class="tips-panel">
+        <h3>💡 Tips</h3>
+        <ul>
+          <li>깊게 고민하지 말고 첫 느낌대로 빠르게 답해보세요. 그게 더 정확해요.</li>
+          <li>"둘 다 아닌 것 같은데" 싶어도 더 가까운 쪽으로 골라주세요.</li>
+          <li>결과가 마음에 안 들어도 괜찮아요 — 유형은 참고용, 나를 아는 건 나 자신이에요.</li>
+        </ul>
+      </div>
+
+      <div class="faq-section">
+        <h2>자주 묻는 질문</h2>
+        <details>
+          <summary>MBTI 검사는 정확한가요?</summary>
+          <p>이 테스트는 재미와 자기 이해를 돕기 위한 약식 검사입니다. 정식 심리검사가 아니므로 참고용으로만 활용해주세요.</p>
+        </details>
+        <details>
+          <summary>몇 번이든 다시 할 수 있나요?</summary>
+          <p>네, "다시 하기" 버튼으로 몇 번이든 재검사할 수 있고 결과는 저장되지 않습니다.</p>
+        </details>
+        <details>
+          <summary>내 답변이 서버에 저장되나요?</summary>
+          <p>아니요. 모든 계산은 브라우저 안에서만 이루어지며 답변이나 결과는 서버로 전송되지 않습니다.</p>
+        </details>
+      </div>
+
+    </div>
+    <aside class="tool-sidebar"></aside>
+  </div>
+
+</main>
+
+<footer class="footer"></footer>
+
+<script>
+window.MBTI_TEST_META = { name: 'MBTI 성격유형검사' };
+</script>
+<script src="js/mbti.js"></script>
+<script src="js/wooa-sidebar.js"></script>
+<script src="js/wooa-footer.js"></script>
+<script src="js/share-button.js"></script>
+<script src="js/ad-dev-placeholder.js"></script>
+
+</body>
+</html>
