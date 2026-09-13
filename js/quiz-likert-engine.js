@@ -18,6 +18,28 @@
 
   var state = { idx: 0, answers: [] };
 
+  // 문항마다 실제 페이지 이동(?q=N)으로 진행 — 광고 재노출을 위해 같은 URL을 인위적으로
+  // reload하는 대신, 문항 자체가 바뀌는 것이므로 진짜 다른 URL로 이동시킨다.
+  // (wooaGosa exam.js와 동일 패턴, [[wooagosa_segment_reload_removed]] 참고)
+  var STORAGE_KEY = 'quiz_progress_' + location.pathname;
+
+  function saveState() {
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function loadState() {
+    try {
+      var raw = sessionStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  function goToQuestionPage(idx) {
+    var url = new URL(location.href);
+    url.searchParams.set('q', String(idx + 1));
+    location.href = url.toString();
+  }
+
   var el = {
     start: document.getElementById('quizStart'),
     quiz: document.getElementById('quizQuestion'),
@@ -60,7 +82,8 @@
     if (state.idx >= ITEMS.length) {
       finish();
     } else {
-      renderQuestion();
+      saveState();
+      goToQuestionPage(state.idx);
     }
   }
 
@@ -68,7 +91,8 @@
     if (state.idx === 0) return;
     state.answers.pop();
     state.idx--;
-    renderQuestion();
+    saveState();
+    goToQuestionPage(state.idx);
   }
 
   function scoreOf(itemIdx) {
@@ -83,11 +107,13 @@
   }
 
   function finish() {
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
     if (cfg.mode === 'traits') {
       var pctMap = computeTraitPercents();
       renderTraitResult(pctMap);
       try {
         var url1 = new URL(location.href);
+        url1.searchParams.delete('q');
         Object.keys(pctMap).forEach(function (key) { url1.searchParams.set(key, pctMap[key]); });
         history.replaceState(null, '', url1.toString());
       } catch (e) {}
@@ -96,6 +122,7 @@
       renderBandResult(total);
       try {
         var url2 = new URL(location.href);
+        url2.searchParams.delete('q');
         url2.searchParams.set('score', total);
         history.replaceState(null, '', url2.toString());
       } catch (e) {}
@@ -156,8 +183,8 @@
 
   function start() {
     state = { idx: 0, answers: [] };
-    showScreen('quiz');
-    renderQuestion();
+    saveState();
+    goToQuestionPage(0);
   }
 
   function retry() { showScreen('start'); }
@@ -168,7 +195,17 @@
 
   try {
     var params = new URLSearchParams(location.search);
-    if (cfg.mode === 'traits') {
+    if (params.has('q')) {
+      // 문제 버튼(다음/이전)으로 이동해온 재방문 — 조용히 해당 문항부터 이어서 진행
+      var saved = loadState();
+      if (saved && saved.idx < ITEMS.length) {
+        state = saved;
+        showScreen('quiz');
+        renderQuestion();
+      } else {
+        showScreen('start');
+      }
+    } else if (cfg.mode === 'traits') {
       var keys = Object.keys(cfg.traits);
       var allPresent = keys.every(function (k) { return params.has(k); });
       if (allPresent) {

@@ -64,6 +64,26 @@
 
   var state = { idx: 0, counts: {} };
 
+  // 문항마다 실제 페이지 이동(?q=N)으로 진행 — [[wooagosa_segment_reload_removed]] 참고
+  var STORAGE_KEY = 'quiz_progress_' + location.pathname;
+
+  function saveState() {
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function loadState() {
+    try {
+      var raw = sessionStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  function goToQuestionPage(idx) {
+    var url = new URL(location.href);
+    url.searchParams.set('q', String(idx + 1));
+    location.href = url.toString();
+  }
+
   var el = {
     start: document.getElementById('quizStart'),
     quiz: document.getElementById('quizQuestion'),
@@ -104,7 +124,8 @@
     if (state.idx >= QUESTIONS.length) {
       finish();
     } else {
-      renderQuestion();
+      saveState();
+      goToQuestionPage(state.idx);
     }
   }
 
@@ -113,10 +134,12 @@
     state.idx--;
     var wasYes = state.history[state.idx];
     if (wasYes) state.counts[QUESTIONS[state.idx].type]--;
-    renderQuestion();
+    saveState();
+    goToQuestionPage(state.idx);
   }
 
   function finish() {
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
     var bestType = 1, bestCount = -1;
     for (var t = 1; t <= 9; t++) {
       if (state.counts[t] > bestCount) { bestCount = state.counts[t]; bestType = t; }
@@ -125,6 +148,7 @@
     showScreen('result');
     try {
       var url = new URL(location.href);
+      url.searchParams.delete('q');
       url.searchParams.set('type', bestType);
       history.replaceState(null, '', url.toString());
     } catch (e) {}
@@ -145,8 +169,8 @@
 
   function start() {
     state = { idx: 0, counts: { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0, 6: 0, 7: 0, 8: 0, 9: 0 }, history: [] };
-    showScreen('quiz');
-    renderQuestion();
+    saveState();
+    goToQuestionPage(0);
   }
 
   function retry() { showScreen('start'); }
@@ -159,10 +183,22 @@
 
   try {
     var params = new URLSearchParams(location.search);
-    var t = parseInt(params.get('type'), 10);
-    if (RESULTS[t]) {
-      renderResult(t);
-      showScreen('result');
+    if (params.has('q')) {
+      // 문제 버튼(다음/이전)으로 이동해온 재방문 — 조용히 해당 문항부터 이어서 진행
+      var saved = loadState();
+      if (saved && saved.idx < QUESTIONS.length) {
+        state = saved;
+        showScreen('quiz');
+        renderQuestion();
+      } else {
+        showScreen('start');
+      }
+    } else {
+      var t = parseInt(params.get('type'), 10);
+      if (RESULTS[t]) {
+        renderResult(t);
+        showScreen('result');
+      }
     }
   } catch (e) {}
 })();

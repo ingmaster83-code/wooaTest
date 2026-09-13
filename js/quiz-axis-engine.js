@@ -25,6 +25,26 @@
 
   var state = { idx: 0, counts: null, history: [] };
 
+  // 문항마다 실제 페이지 이동(?q=N)으로 진행 — [[wooagosa_segment_reload_removed]] 참고
+  var STORAGE_KEY = 'quiz_progress_' + location.pathname;
+
+  function saveState() {
+    try { sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function loadState() {
+    try {
+      var raw = sessionStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch (e) { return null; }
+  }
+
+  function goToQuestionPage(idx) {
+    var url = new URL(location.href);
+    url.searchParams.set('q', String(idx + 1));
+    location.href = url.toString();
+  }
+
   var el = {
     start: document.getElementById('quizStart'),
     quiz: document.getElementById('quizQuestion'),
@@ -65,7 +85,8 @@
     if (state.idx >= QUESTIONS.length) {
       finish();
     } else {
-      renderQuestion();
+      saveState();
+      goToQuestionPage(state.idx);
     }
   }
 
@@ -74,7 +95,8 @@
     var last = state.history.pop();
     state.counts[last]--;
     state.idx--;
-    renderQuestion();
+    saveState();
+    goToQuestionPage(state.idx);
   }
 
   function computeCode() {
@@ -85,11 +107,13 @@
   }
 
   function finish() {
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
     var code = computeCode();
     renderResult(code);
     showScreen('result');
     try {
       var url = new URL(location.href);
+      url.searchParams.delete('q');
       url.searchParams.set('type', code);
       history.replaceState(null, '', url.toString());
     } catch (e) {}
@@ -116,8 +140,8 @@
   function start() {
     state = { idx: 0, counts: {}, history: [] };
     QUESTIONS.forEach(function (q) { state.counts[q.av] = 0; state.counts[q.bv] = 0; });
-    showScreen('quiz');
-    renderQuestion();
+    saveState();
+    goToQuestionPage(0);
   }
 
   function retry() { showScreen('start'); }
@@ -130,10 +154,22 @@
 
   try {
     var params = new URLSearchParams(location.search);
-    var t = (params.get('type') || '').toUpperCase();
-    if (RESULTS[t]) {
-      renderResult(t);
-      showScreen('result');
+    if (params.has('q')) {
+      // 문제 버튼(다음/이전)으로 이동해온 재방문 — 조용히 해당 문항부터 이어서 진행
+      var saved = loadState();
+      if (saved && saved.idx < QUESTIONS.length) {
+        state = saved;
+        showScreen('quiz');
+        renderQuestion();
+      } else {
+        showScreen('start');
+      }
+    } else {
+      var t = (params.get('type') || '').toUpperCase();
+      if (RESULTS[t]) {
+        renderResult(t);
+        showScreen('result');
+      }
     }
   } catch (e) {}
 })();
