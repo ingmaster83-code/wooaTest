@@ -155,6 +155,13 @@
   }
 
   function renderTraitResult(pctMap) {
+    var topKey = null, topPct = -1;
+    Object.keys(pctMap).forEach(function (k) {
+      if (pctMap[k] > topPct) { topPct = pctMap[k]; topKey = k; }
+    });
+    if (topKey && cfg.traits[topKey]) {
+      window.QUIZ_RESULT_SUMMARY = cfg.traits[topKey].icon + ' ' + cfg.traits[topKey].name + ' ' + topPct + '%';
+    }
     var html = '<div class="result-emoji">📊</div><div class="result-title">' + cfg.meta.resultTitle + '</div>';
     html += '<div style="max-width:480px;margin:1.25rem auto 0;text-align:left;">';
     Object.keys(cfg.traits).forEach(function (key) {
@@ -174,6 +181,7 @@
 
   function renderBandResult(total) {
     var band = cfg.bands.find(function (b) { return total <= b.max; }) || cfg.bands[cfg.bands.length - 1];
+    window.QUIZ_RESULT_SUMMARY = band.emoji + ' ' + band.title;
     el.resultArea.innerHTML =
       '<div class="result-emoji">' + band.emoji + '</div>' +
       '<div class="result-title">' + band.title + '</div>' +

@@ -166,6 +166,7 @@
 
   function renderResult(code) {
     var r = RESULTS[code];
+    window.QUIZ_RESULT_SUMMARY = r.emoji + ' ' + code + ' · ' + r.title;
     el.resultArea.innerHTML =
       '<div class="result-emoji">' + r.emoji + '</div>' +
       '<div class="result-type-label">' + code + '</div>' +

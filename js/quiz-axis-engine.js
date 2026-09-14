@@ -123,6 +123,7 @@
   function renderResult(code) {
     var r = RESULTS[code];
     if (!r) { el.resultArea.innerHTML = '<p>결과를 계산할 수 없습니다. 다시 시도해주세요.</p>'; return; }
+    window.QUIZ_RESULT_SUMMARY = r.emoji + ' ' + r.title;
     var traitCards = (r.strengths || []).map(function (s) {
       return '<div class="result-trait-card"><h4>' + s.h + '</h4><p>' + s.p + '</p></div>';
     }).join('');
