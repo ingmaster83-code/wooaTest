@@ -179,3 +179,7 @@ img { max-width: 100%; }
   .result-trait-grid { grid-template-columns: 1fr; }
   .quiz-box { padding: 1.25rem 1rem; }
 }
+
+/* 문항 진행 페이지(?q=N): 큰 히어로·빵부스러기를 접어 문제와 선택지가 첫 화면에 바로 보이게 한다.
+   스크롤 없이 답할 수 있어 상단 광고가 화면에 남는 시간이 늘고(조회가능률↑) 문항당 이동도 빨라진다. 고지문(.disclaimer-box)은 유지. */
+html.quiz-q .hero, html.quiz-q .breadcrumb { display: none; }
